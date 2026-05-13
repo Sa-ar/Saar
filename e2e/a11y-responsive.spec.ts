@@ -52,11 +52,20 @@ test.describe('accessibility + responsive invariants', () => {
     await hamburger.click();
   });
 
-  test('home: nav visibility at desktop breakpoint', async ({ page }) => {
+  test('home: craft chip navigates to case study', async ({ page }) => {
     await page.setViewportSize({ width: 1200, height: VIEWPORT_HEIGHT });
     await page.goto('/', { waitUntil: 'load' });
-    await expect(page.locator('#nav-hamburger')).not.toBeVisible();
-    await expect(page.locator('.nav-links--desktop')).toBeVisible();
+    await page.locator('a.case-file-chip[href="/work/bottom-sheet"]').click();
+    await expect(page).toHaveURL(/\/work\/bottom-sheet\/?$/);
+    await expect(page.locator('h1.case-h1')).toBeVisible();
+  });
+
+  test('home: work section case study link navigates', async ({ page }) => {
+    await page.setViewportSize({ width: 1200, height: VIEWPORT_HEIGHT });
+    await page.goto('/', { waitUntil: 'load' });
+    await page.locator('#work a.case-study-inline-link[href="/work/monday-nested-blocks"]').click();
+    await expect(page).toHaveURL(/\/work\/monday-nested-blocks\/?$/);
+    await expect(page.locator('h1.case-h1')).toBeVisible();
   });
 
   test('home: hero terminal command then axe', async ({ page }) => {

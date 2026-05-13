@@ -37,15 +37,14 @@ const {
   <script is:inline>
     (function () {
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-      var nodes = document.querySelectorAll('[data-parallax]');
+      const nodes = document.querySelectorAll('[data-parallax]');
       if (!nodes.length) return;
-      var maxScroll = 1;
-      var ticking = false;
+      let ticking = false;
       function apply() {
-        var y = window.scrollY || window.pageYOffset;
-        for (var i = 0; i < nodes.length; i++) {
-          var el = nodes[i];
-          var speed = parseFloat(el.getAttribute('data-parallax') || '0.1');
+        const y = window.scrollY || window.pageYOffset;
+        for (let i = 0; i < nodes.length; i++) {
+          const el = nodes[i];
+          const speed = parseFloat(el.getAttribute('data-parallax') || '0.1');
           el.style.transform = 'translate3d(0,' + Math.round(y * speed) + 'px,0)';
         }
         ticking = false;

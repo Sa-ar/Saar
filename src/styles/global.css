@@ -599,6 +599,7 @@
     background: rgba(248, 241, 255, 0.03);
     color: var(--ink);
     text-decoration: none;
+    cursor: pointer;
     transition: border-color 200ms, background 200ms, transform 200ms;
   }
   .case-file-chip:hover,

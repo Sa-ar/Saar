@@ -56,12 +56,12 @@ const section = (id: string) => `${sectionHrefPrefix}#${id}`;
     const menu = document.getElementById('nav-mobile-menu');
     if (!btn || !menu) return;
     const setOpen = function (open) {
-      var wasOpen = btn.getAttribute('aria-expanded') === 'true';
+      const wasOpen = btn.getAttribute('aria-expanded') === 'true';
       btn.setAttribute('aria-expanded', String(open));
       menu.setAttribute('data-open', String(open));
       if (open && !wasOpen) {
         requestAnimationFrame(function () {
-          var link = menu.querySelector('a');
+          const link = menu.querySelector('a');
           if (link) link.focus();
         });
       } else if (!open && wasOpen) {
@@ -79,8 +79,8 @@ const section = (id: string) => `${sectionHrefPrefix}#${id}`;
     document.addEventListener('keydown', function (event) {
       if (event.key === 'Escape') setOpen(false);
     });
-    var mq = window.matchMedia('(min-width: 821px)');
-    var handleChange = function (e) { if (e.matches) setOpen(false); };
+    const mq = window.matchMedia('(min-width: 821px)');
+    const handleChange = function (e) { if (e.matches) setOpen(false); };
     if (mq.addEventListener) mq.addEventListener('change', handleChange);
     else mq.addListener(handleChange);
   })();

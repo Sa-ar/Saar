@@ -34,18 +34,18 @@ const { title, description, eyebrow } = Astro.props;
   </button>
   <script is:inline>
     (function () {
-      var btn = document.getElementById('case-study-scroll-top');
+      const btn = document.getElementById('case-study-scroll-top');
       if (!btn) return;
-      var threshold = 320;
+      const threshold = 320;
       function prefersReducedMotion() {
         try {
           return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        } catch (e) {
+        } catch {
           return false;
         }
       }
       function sync() {
-        var y = window.scrollY || window.pageYOffset;
+        const y = window.scrollY || window.pageYOffset;
         if (y > threshold) {
           btn.classList.add('scroll-to-top--visible');
           btn.removeAttribute('hidden');
@@ -59,11 +59,11 @@ const { title, description, eyebrow } = Astro.props;
           top: 0,
           behavior: prefersReducedMotion() ? 'auto' : 'smooth',
         });
-        var main = document.getElementById('main-content');
+        const main = document.getElementById('main-content');
         if (main && typeof main.focus === 'function') {
           try {
             main.focus({ preventScroll: true });
-          } catch (e) {
+          } catch {
             main.focus();
           }
         }
