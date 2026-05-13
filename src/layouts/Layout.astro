@@ -563,6 +563,137 @@ const {
     color: color-mix(in srgb, var(--accent) 85%, var(--ink)) !important;
   }
 
+  /* Craft section — brand strip */
+  .craft-brands {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px 24px;
+    padding: 20px 0;
+    margin: 0 0 48px;
+    border-top: 1px solid rgba(248, 241, 255, 0.08);
+    border-bottom: 1px solid rgba(248, 241, 255, 0.08);
+  }
+  .craft-brands__label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--dim);
+    flex-shrink: 0;
+  }
+  .craft-brands__list {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+  .craft-brands__name {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    line-height: 1;
+  }
+  .craft-brands__sep {
+    font-family: var(--font-display);
+    font-size: 22px;
+    color: var(--dim);
+    line-height: 1;
+    user-select: none;
+  }
+  @media (max-width: 600px) {
+    .craft-brands__name { font-size: 18px; }
+    .craft-brands__sep { font-size: 18px; }
+  }
+
+  /* Craft section — case file chips */
+  .case-file-chip {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px 20px 18px;
+    border-radius: 12px;
+    border: 1px solid rgba(248, 241, 255, 0.12);
+    background: rgba(248, 241, 255, 0.03);
+    color: var(--ink);
+    text-decoration: none;
+    transition: border-color 200ms, background 200ms, transform 200ms;
+  }
+  .case-file-chip:hover,
+  .case-file-chip:focus-visible {
+    border-color: color-mix(in srgb, var(--accent) 55%, transparent);
+    background: rgba(248, 241, 255, 0.05);
+    transform: translateY(-2px);
+  }
+  .case-file-chip__meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--dim);
+  }
+  .case-file-chip__dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    display: inline-block;
+    flex-shrink: 0;
+  }
+  .case-file-chip__title {
+    font-family: var(--font-display);
+    font-size: 26px;
+    font-weight: 700;
+    margin: 0;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    transition: color 200ms;
+  }
+  .case-file-chip:hover .case-file-chip__title,
+  .case-file-chip:focus-visible .case-file-chip__title {
+    color: var(--accent);
+  }
+  .case-file-chip__sub {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--dim);
+    margin-top: -2px;
+    line-height: 1.4;
+  }
+  .case-file-chip__body {
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: var(--dim);
+    margin: 0;
+    flex: 1;
+  }
+  .case-file-chip__cta {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 4px;
+  }
+  .case-file-chip__arrow {
+    display: inline-block;
+    transition: transform 200ms;
+  }
+  .case-file-chip:hover .case-file-chip__arrow,
+  .case-file-chip:focus-visible .case-file-chip__arrow {
+    transform: translateX(3px);
+  }
+
   /* Project card */
   .project-card { display: grid; grid-template-columns: 60px 1fr auto; gap: 24px;
     align-items: center; text-decoration: none; color: var(--ink);

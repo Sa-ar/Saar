@@ -86,7 +86,7 @@ export const projects: Project[] = [
  */
 export const siteSectionAnchors: { id: string; aliases?: string[] }[] = [
   { id: 'about', aliases: ['me', 'bio'] },
-  { id: 'craft', aliases: ['principles', 'ai'] },
+  { id: 'craft', aliases: ['proof', 'receipts', 'cases', 'stats'] },
   { id: 'work', aliases: ['projects', 'shipping', 'portfolio'] },
   { id: 'beyond', aliases: ['life', 'outside'] },
   { id: 'stack', aliases: ['skills', 'tools', 'tech'] },

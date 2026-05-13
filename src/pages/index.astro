@@ -39,6 +39,35 @@ const year = new Date().getFullYear();
 const yearsShippingProse = shippingYearsProse();
 const sinceCardLine = shippingSinceCardLine();
 
+const craftBrands = ['monday.com', 'Healthy.io', 'Autofleet', 'Enpitech'];
+
+const craftPillars = [
+  {
+    slug: 'monday-nested-blocks',
+    n: '01',
+    category: 'Scale',
+    project: 'monday Workdocs · Block-in-Block & Callout',
+    body: 'Shipped to 300k+ active users. The real work was protecting a document model from invalid states — not drawing nested UI.',
+    dot: 'var(--accent)',
+  },
+  {
+    slug: 'healthy-io-marketing',
+    n: '02',
+    category: 'Regulated',
+    project: 'Healthy.io · FDA-cleared home urinalysis',
+    body: 'Global Next.js + DatoCMS surfaces where SEO, accessibility, localization, and clinical clarity all had to hold together.',
+    dot: 'var(--cyan)',
+  },
+  {
+    slug: 'bottom-sheet',
+    n: '03',
+    category: 'Architecture',
+    project: 'Autofleet · React Native + MobX',
+    body: 'A @gorhom/bottom-sheet upgrade that looked like a version bump and behaved like a platform migration — weeks of reconciling new internals against legacy seams.',
+    dot: 'var(--lime)',
+  },
+];
+
 /** Long hero copy — read in the terminal via `cat intro`. */
 const heroIntroTerminalLines = [
   'I build polished product interfaces and the AI workflows behind them — React, TypeScript, Next.js, Node.js, RAG, agents, and eval loops when the product needs them.',
@@ -209,47 +238,47 @@ const beyondBlocks = [
     </div>
   </section>
 
-  <!-- CRAFT: principles + AI product notes -->
+  <!-- CRAFT: positioning + brand strip + capability pillars -->
   <section
     id="craft"
     class="section-pad"
     style="padding:100px 56px 120px;position:relative;z-index:1;border-top:1px solid rgba(248,241,255,.08);"
   >
     <div style="font-family:var(--font-mono);font-size:11px;letter-spacing:.2em;color:var(--accent);margin-bottom:16px;">02 — craft</div>
-    <h2 class="section-h2" style="font-family:var(--font-display);font-size:56px;font-weight:700;line-height:.98;margin:0 0 28px;letter-spacing:-.03em;">
-      how I make AI products <span style="font-style:italic;font-weight:400;opacity:.6;">feel real.</span>
+    <h2 class="section-h2" style="font-family:var(--font-display);font-size:56px;font-weight:700;line-height:.98;margin:0 0 24px;letter-spacing:-.03em;">
+      the <span style="font-style:italic;font-weight:400;opacity:.6;">receipts.</span>
     </h2>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;" class="craft-grid">
-      <div>
-        <p style="font-family:var(--font-mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);margin:0 0 14px;">Principles</p>
-        <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:18px;font-size:17px;line-height:1.65;color:rgba(248,241,255,.88);">
-          <li style="display:flex;gap:14px;">
-            <span style="font-family:var(--font-mono);font-size:12px;color:var(--accent);flex-shrink:0;margin-top:2px;">01</span>
-            <span><strong style="color:var(--ink);">Start from the product moment.</strong> Before choosing tools, get clear on the user job, the trust boundary, and what a bad answer or broken flow would cost.</span>
-          </li>
-          <li style="display:flex;gap:14px;">
-            <span style="font-family:var(--font-mono);font-size:12px;color:var(--accent);flex-shrink:0;margin-top:2px;">02</span>
-            <span><strong style="color:var(--ink);">Make behavior observable.</strong> Baseline flows, data, errors, and regressions. For AI work, add eval examples and feedback loops so quality is not just a feeling.</span>
-          </li>
-          <li style="display:flex;gap:14px;">
-            <span style="font-family:var(--font-mono);font-size:12px;color:var(--accent);flex-shrink:0;margin-top:2px;">03</span>
-            <span><strong style="color:var(--ink);">Keep interfaces legible.</strong> UI state, async work, model uncertainty, and fallback paths should be visible enough that users know what is happening and engineers can debug it later.</span>
-          </li>
-        </ul>
+    <p style="font-size:18px;line-height:1.55;color:rgba(248,241,255,.86);max-width:720px;margin:0 0 28px;">
+      Three credentials most frontend engineers don't have together: <strong style="color:var(--ink);">production-scale React</strong> at monday.com Workdocs (300k+ users), <strong style="color:var(--ink);">FDA-cleared product UI</strong> at Healthy.io, and <strong style="color:var(--ink);">React Native architecture</strong> at Autofleet.
+    </p>
+
+    <div class="craft-brands">
+      <span class="craft-brands__label">Shipped at</span>
+      <div class="craft-brands__list">
+        {craftBrands.map((brand, i) => (
+          <>
+            {i > 0 && <span class="craft-brands__sep" aria-hidden="true">·</span>}
+            <span class="craft-brands__name">{brand}</span>
+          </>
+        ))}
       </div>
-      <div>
-        <p style="font-family:var(--font-mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);margin:0 0 14px;">AI product focus</p>
-        <div style="margin-top:8px;padding:28px 26px 26px;border-radius:14px;border:1px solid rgba(248,241,255,.12);background:rgba(248,241,255,.03);max-width:720px;">
-          <p style="margin:0 0 18px;font-size:15px;line-height:1.65;color:var(--dim);">
-            The AI work I care about is not “add a chat box.” It is the product layer around the model: what context it sees, how users recover when it is wrong, and how the team knows whether behavior is getting better.
-          </p>
-          <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:14px;font-size:15px;line-height:1.6;color:rgba(248,241,255,.86);">
-            <li><strong style="color:var(--ink);">Retrieval people can trust:</strong> sources, scope, freshness, and enough UI context to understand where an answer came from.</li>
-            <li><strong style="color:var(--ink);">Agents with boundaries:</strong> clear permissions, visible progress, graceful stops, and handoffs when automation should not guess.</li>
-            <li><strong style="color:var(--ink);">Evals that stay close to users:</strong> small, concrete test sets from real tasks instead of abstract benchmark theater.</li>
-          </ul>
-        </div>
-      </div>
+    </div>
+
+    <div class="case-files-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;">
+      {craftPillars.map(({ slug, n, category, project, body, dot }) => (
+        <a href={`/work/${slug}`} class="case-file-chip">
+          <div class="case-file-chip__meta">
+            <span class="case-file-chip__dot" style={`background:${dot};box-shadow:0 0 8px ${dot};`}></span>
+            {n} · capability
+          </div>
+          <h3 class="case-file-chip__title">{category}</h3>
+          <div class="case-file-chip__sub">{project}</div>
+          <p class="case-file-chip__body">{body}</p>
+          <span class="case-file-chip__cta">
+            Read case study <span class="case-file-chip__arrow" aria-hidden="true">→</span>
+          </span>
+        </a>
+      ))}
     </div>
   </section>
 
