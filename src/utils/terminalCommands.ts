@@ -162,6 +162,11 @@ export function runCommand(raw: string, ctx: RunCommandContext): CommandResult {
     return { lines: ['__CLEAR__'] };
   }
 
+  // Undocumented
+  if (cmd === 'claude' && !arg) {
+    return { lines: ['No, my name is Saar.'] };
+  }
+
   if (cmd === 'help') {
     const sections = [...ctx.sectionIds].sort().join(', ');
     const slugs = [...ctx.knownSlugs].sort().join(', ');
