@@ -32,3 +32,4 @@ pnpm-debug.log*
 
 # Use pnpm only
 package-lock.json
+.vercel
