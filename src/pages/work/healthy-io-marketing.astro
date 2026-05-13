@@ -1,0 +1,70 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout
+  title="Healthy.io — marketing systems | Saar Davidson"
+  description="Next.js marketing systems at Healthy.io: SEO, accessibility, geofencing via middleware, and keeping content velocity on a maintainable foundation."
+>
+  <main id="main-content" tabindex="-1">
+  <article class="case-article section-pad" style="padding:48px 56px 100px;max-width:720px;margin:0 auto;position:relative;z-index:1;">
+    <p style="font-family:var(--font-mono);font-size:11px;letter-spacing:.2em;color:var(--accent);margin:0 0 20px;">
+      <a href="/#work" style="color:var(--dim);text-decoration:none;">← Selected work</a>
+      <span style="color:rgba(248,241,255,.25);"> · </span>
+      <span style="color:var(--dim);">HEALTHY.IO · MARKETING PLATFORM</span>
+    </p>
+    <h1 class="case-h1" style="font-family:var(--font-display);font-size:clamp(36px,5vw,52px);font-weight:800;line-height:1.05;margin:0 0 16px;letter-spacing:-.03em;">
+      Marketing systems are product systems when the stakes are high.
+    </h1>
+    <p style="font-size:18px;line-height:1.65;color:var(--dim);margin:0 0 32px;">
+      At Healthy.io I worked on <strong style="color:var(--ink);">multiple marketing platforms and landing systems</strong>. The work may look like “just pages” from the outside, but the real job was keeping public surfaces crawlable, accessible, localized, fast, and flexible enough for marketing to move.
+    </p>
+
+    <h2 style="font-family:var(--font-display);font-size:26px;font-weight:700;margin:40px 0 12px;letter-spacing:-.02em;">Context</h2>
+    <p style="font-size:17px;line-height:1.7;color:var(--dim);margin:0;">
+      The properties had to stay fast, maintainable for a small frontend surface, and flexible enough for campaigns and experiments. Marketing, design, compliance-adjacent review, and engineering all pulled on the same Next.js and CMS layer.
+    </p>
+
+    <h2 style="font-family:var(--font-display);font-size:26px;font-weight:700;margin:40px 0 12px;letter-spacing:-.02em;">Problem</h2>
+    <p style="font-size:17px;line-height:1.7;color:var(--dim);margin:0 0 16px;">
+      The tension was not “build a landing page”; it was <strong style="color:var(--ink);">balancing business velocity with architectural sanity</strong>. Every shortcut shows up twice: once in Lighthouse, once six months later when nobody remembers why that route behaves differently in production.
+    </p>
+    <p style="font-size:17px;line-height:1.7;color:var(--dim);margin:0;">
+      Hidden complexity stacked up: SEO risk during refactors, accessibility expectations, performance pressure, content velocity, and experimentation loops that do not wait for a rewrite window.
+    </p>
+
+    <h2 style="font-family:var(--font-display);font-size:26px;font-weight:700;margin:40px 0 12px;letter-spacing:-.02em;">Constraints</h2>
+    <ul style="margin:0;padding-left:1.2em;font-size:17px;line-height:1.7;color:rgba(248,241,255,.88);">
+      <li>SEO and share metadata had to stay correct across locales and templates.</li>
+      <li>Accessibility was not a polish pass; it was part of what “shipped” meant.</li>
+      <li>Shared infrastructure across sites had to stay predictable as page count grew.</li>
+    </ul>
+
+    <h2 style="font-family:var(--font-display);font-size:26px;font-weight:700;margin:40px 0 12px;letter-spacing:-.02em;">Technical decision</h2>
+    <p style="font-size:17px;line-height:1.7;color:var(--dim);margin:0 0 16px;">
+      Standardize on <strong style="color:var(--ink);">Next.js</strong> patterns the team could reuse: shared page systems, clear data boundaries for CMS content, and <strong style="color:var(--ink);">middleware</strong> where cross-cutting behavior belonged, including country-specific routing, geofencing, sunsets, redirects, and traffic shaping without duplicating logic in every page.
+    </p>
+    <p style="font-size:17px;line-height:1.7;color:var(--dim);margin:0;">
+      A notable slice of this era was upgrading a large codebase from <strong style="color:var(--ink);">Next.js 11 → 12</strong>. The version bump was not the story; the unlock was using middleware deliberately for geo and routing concerns instead of scattering one-off checks through the tree.
+    </p>
+
+    <h2 style="font-family:var(--font-display);font-size:26px;font-weight:700;margin:40px 0 12px;letter-spacing:-.02em;">Rollout &amp; risk</h2>
+    <p style="font-size:17px;line-height:1.7;color:var(--dim);margin:0;">
+      Risk showed up as <strong style="color:var(--ink);">SEO regressions</strong>, subtle accessibility breaks, and performance cliffs when marketing velocity outpaced cleanup. Mitigation was intentionally boring: representative routes in CI, design alignment before pixel-chasing, and explicit boundaries around what “pixel perfect” meant so engineering time went to durable outcomes.
+    </p>
+
+    <h2 style="font-family:var(--font-display);font-size:26px;font-weight:700;margin:40px 0 12px;letter-spacing:-.02em;">Result</h2>
+    <p style="font-size:17px;line-height:1.7;color:var(--dim);margin:0;">
+      Marketing could iterate faster on a shared, well-understood stack. Engineering kept a maintainable spine — routing, middleware, and reusable page shells — instead of a graveyard of one-off landings. The public sites stayed within reach of performance and accessibility goals while the business kept shipping campaigns.
+    </p>
+
+    <h2 style="font-family:var(--font-display);font-size:26px;font-weight:700;margin:40px 0 12px;letter-spacing:-.02em;">Reflection</h2>
+    <p style="font-size:17px;line-height:1.7;color:var(--dim);margin:0;">
+      <strong style="color:var(--ink);">Good frontend work protects both users and the team that ships for them.</strong> The durable win is aligning on what actually moves the business — crawlability, clarity, speed, accessibility — and letting the craft show up there first.
+    </p>
+
+    <p style="margin-top:48px;font-family:var(--font-mono);font-size:12px;letter-spacing:.12em;color:var(--dim);">
+      <a href="/work/monday-nested-blocks" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px;">← monday.com nested blocks</a>
+    </p>
+  </article>
+  </main>
+</Layout>

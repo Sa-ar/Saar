@@ -1,0 +1,34 @@
+# Dependencies
+node_modules/
+
+# Build / Astro
+dist/
+.astro/
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+pnpm-debug.log*
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+
+# Local agent / IDE scratch
+.superpowers/
+
+# Use pnpm only
+package-lock.json

@@ -1,0 +1,77 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout
+  title="monday Workdocs — valid nested blocks | Saar Davidson"
+  description="NestedBlock architecture for monday.com Workdocs: validation, serialization, safe rollout, and protecting a rich editor from impossible states."
+>
+  <main id="main-content" tabindex="-1">
+  <article class="case-article section-pad" style="padding:48px 56px 100px;max-width:720px;margin:0 auto;position:relative;z-index:1;">
+    <p style="font-family:var(--font-mono);font-size:11px;letter-spacing:.2em;color:var(--accent);margin:0 0 20px;">
+      <a href="/#work" style="color:var(--dim);text-decoration:none;">← Selected work</a>
+      <span style="color:rgba(248,241,255,.25);"> · </span>
+      <span style="color:var(--dim);">MONDAY.COM · WORKDOCS</span>
+    </p>
+    <h1 class="case-h1" style="font-family:var(--font-display);font-size:clamp(36px,5vw,52px);font-weight:800;line-height:1.05;margin:0 0 16px;letter-spacing:-.03em;">
+      The hard part was not nesting blocks. It was keeping the editor honest.
+    </h1>
+    <p style="font-size:18px;line-height:1.65;color:var(--dim);margin:0 0 32px;">
+      Workdocs behaved like a Notion-style editor: composable blocks, rich layouts, and many implicit rules about what could live inside what. The product needed <strong style="color:var(--ink);">deeper nesting</strong>, including callout and note-like structures, without destabilizing editing, serialization, or migrations.
+    </p>
+
+    <h2 style="font-family:var(--font-display);font-size:26px;font-weight:700;margin:40px 0 12px;letter-spacing:-.02em;">Context</h2>
+    <p style="font-size:17px;line-height:1.7;color:var(--dim);margin:0;">
+      The editor already supported tables, split and layout blocks, and standard content. A new feature line pushed nesting further, but the architecture had not been designed as one constraint-first model. Each block type carried slightly different capabilities and edge cases.
+    </p>
+
+    <h2 style="font-family:var(--font-display);font-size:26px;font-weight:700;margin:40px 0 12px;letter-spacing:-.02em;">Problem</h2>
+    <p style="font-size:17px;line-height:1.7;color:var(--dim);margin:0 0 16px;">
+      You cannot declare “everything may contain children” and call it done. Some combinations broke editor assumptions; some interactions produced states that were hard to serialize or migrate cleanly. The danger was not only pixels; it was <strong style="color:var(--ink);">consistency, invalid trees, migration safety, and rollout stability</strong> across a large surface.
+    </p>
+    <p style="font-size:17px;line-height:1.7;color:var(--dim);margin:0;">
+      Without a central model, nesting logic would scatter into conditionals and one-off guards. That is the kind of slow reliability leak that gets harder to reverse every sprint.
+    </p>
+
+    <h2 style="font-family:var(--font-display);font-size:26px;font-weight:700;margin:40px 0 12px;letter-spacing:-.02em;">Constraints</h2>
+    <ul style="margin:0;padding-left:1.2em;font-size:17px;line-height:1.7;color:rgba(248,241,255,.88);">
+      <li>Per-block rules differed: not every block should accept every child type.</li>
+      <li>Serialization and migrations had to stay safe as the document model evolved.</li>
+      <li>Feature work needed to ship incrementally, not as one risky “big bang.”</li>
+    </ul>
+
+    <h2 style="font-family:var(--font-display);font-size:26px;font-weight:700;margin:40px 0 12px;letter-spacing:-.02em;">Technical decision</h2>
+    <p style="font-size:17px;line-height:1.7;color:var(--dim);margin:0 0 16px;">
+      Extend the existing abstraction instead of bolting nesting on per feature. Introduce and extend a <strong style="color:var(--ink);">NestedBlock</strong> layer, reuse shared behavior through <strong style="color:var(--ink);">BaseBlock</strong>, and <strong style="color:var(--ink);">centralize validation</strong> for allowed nesting with capability checks per block type.
+    </p>
+    <p style="font-family:var(--font-mono);font-size:13px;line-height:1.6;color:var(--dim);margin:0;padding:14px 16px;background:rgba(248,241,255,.04);border:1px solid rgba(248,241,255,.1);border-radius:8px;white-space:pre-wrap;">BaseBlock
+  └── NestedBlock (shared nesting + validation)
+        ├── Table
+        ├── Split / layout
+        └── Callout / note-like</p>
+
+    <h2 style="font-family:var(--font-display);font-size:26px;font-weight:700;margin:40px 0 12px;letter-spacing:-.02em;">Rollout &amp; risk</h2>
+    <p style="font-size:17px;line-height:1.7;color:var(--dim);margin:0 0 16px;">
+      Shipped with <strong style="color:var(--ink);">feature flags</strong> and gradual rollout, with Datadog monitoring around editor failures. On this path there was not dedicated QA ownership for every edge, so engineering owned implementation, rollout, observability, and production validation end to end.
+    </p>
+    <p style="font-size:17px;line-height:1.7;color:var(--dim);margin:0;">
+      That pushed explicit metrics and failure signals into the work from the beginning instead of treating them as optional polish.
+    </p>
+
+    <h2 style="font-family:var(--font-display);font-size:26px;font-weight:700;margin:40px 0 12px;letter-spacing:-.02em;">Result</h2>
+    <p style="font-size:17px;line-height:1.7;color:var(--dim);margin:0;">
+      Table, split, and callout-style blocks could share nesting behavior instead of each re-implementing rules. The editor gained a clearer place to answer “is this tree valid?” before bad state reached users, persistence, or future migrations.
+    </p>
+
+    <h2 style="font-family:var(--font-display);font-size:26px;font-weight:700;margin:40px 0 12px;letter-spacing:-.02em;">Reflection</h2>
+    <p style="font-size:17px;line-height:1.7;color:var(--dim);margin:0;">
+      <strong style="color:var(--ink);">The hard part was protecting the editor from impossible states.</strong> That turns rich-text work into a systems-design problem: constraints, invariants, and safe evolution matter more than any single UI control.
+    </p>
+
+    <p style="margin-top:48px;font-family:var(--font-mono);font-size:12px;letter-spacing:.12em;color:var(--dim);">
+      <a href="/work/bottom-sheet" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px;">← Bottom sheet rewrite</a>
+      <span style="color:rgba(248,241,255,.25);"> · </span>
+      <a href="/work/healthy-io-marketing" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px;">Next: Healthy.io marketing →</a>
+    </p>
+  </article>
+  </main>
+</Layout>

@@ -1,0 +1,70 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout
+  title="Bottom sheet migration — product primitive case study | Saar Davidson"
+  description="A React Native bottom-sheet migration that became product infrastructure work: hidden contracts, gesture stacks, keyboard behavior, and safer rollout."
+>
+  <main id="main-content" tabindex="-1">
+  <article class="case-article section-pad" style="padding:48px 56px 100px;max-width:720px;margin:0 auto;position:relative;z-index:1;">
+    <p style="font-family:var(--font-mono);font-size:11px;letter-spacing:.2em;color:var(--accent);margin:0 0 20px;">
+      <a href="/#work" style="color:var(--dim);text-decoration:none;">← Selected work</a>
+      <span style="color:rgba(248,241,255,.25);"> · </span>
+      <span style="color:var(--dim);">ENPITECH · REACT NATIVE</span>
+    </p>
+    <h1 class="case-h1" style="font-family:var(--font-display);font-size:clamp(36px,5vw,52px);font-weight:800;line-height:1.05;margin:0 0 16px;letter-spacing:-.03em;">
+      A small upgrade that behaved like product infrastructure.
+    </h1>
+    <p style="font-size:18px;line-height:1.65;color:var(--dim);margin:0 0 32px;">
+      The brief was to move Autofleet’s mobile surface to a newer <strong style="color:var(--ink);">@gorhom/bottom-sheet</strong>, remove old hacks, improve animations, and support dynamic content height. On paper, that sounds like a dependency bump. In practice, it touched a product primitive that many flows quietly depended on.
+    </p>
+
+    <h2 style="font-family:var(--font-display);font-size:26px;font-weight:700;margin:40px 0 12px;letter-spacing:-.02em;">Context</h2>
+    <p style="font-size:17px;line-height:1.7;color:var(--dim);margin:0;">
+      Autofleet ships operator and driver flows in React Native. Bottom sheets were not one neat component; they were a <strong style="color:var(--ink);">shared interaction layer</strong> made of modal wrappers, legacy drawers, gesture handlers, keyboard avoidance, and navigation glue. Upgrading the library meant changing timing and mount order for flows that had been tuned in place for years.
+    </p>
+
+    <h2 style="font-family:var(--font-display);font-size:26px;font-weight:700;margin:40px 0 12px;letter-spacing:-.02em;">Problem</h2>
+    <p style="font-size:17px;line-height:1.7;color:var(--dim);margin:0 0 16px;">
+      The risk was not mostly TypeScript errors; it was <strong style="color:var(--ink);">silent behavioral drift</strong>. Two abstractions (<code style="font-size:0.92em;">BottomDrawer</code> and <code style="font-size:0.92em;">BottomSheet</code>) coexisted with different contracts. Screens depended on animation timing, snap defaults, backdrop taps, focus order, and gesture propagation, often without saying so.
+    </p>
+    <p style="font-size:17px;line-height:1.7;color:var(--dim);margin:0;">
+      Changing the sheet changed navigation stacks, modal layering, keyboard behavior, and layout measurement, even when the compile step stayed green.
+    </p>
+
+    <h2 style="font-family:var(--font-display);font-size:26px;font-weight:700;margin:40px 0 12px;letter-spacing:-.02em;">Constraints</h2>
+    <ul style="margin:0;padding-left:1.2em;font-size:17px;line-height:1.7;color:rgba(248,241,255,.88);">
+      <li>High coupling: z-index workarounds, duplicated implementations, and modal wrappers that assumed the old timing model.</li>
+      <li>Regressions that only showed up in real flows, including late-night driver paths rather than happy-path smoke tests.</li>
+      <li>No single owner for “all sheets”; usage had evolved organically across teams and features.</li>
+    </ul>
+
+    <h2 style="font-family:var(--font-display);font-size:26px;font-weight:700;margin:40px 0 12px;letter-spacing:-.02em;">Technical decision</h2>
+    <p style="font-size:17px;line-height:1.7;color:var(--dim);margin:0 0 16px;">
+      Treat the migration as <strong style="color:var(--ink);">re-establishing contracts</strong>, not swapping imports. I inventoried call sites, aligned usage around one abstraction where possible, and validated the risky dimensions explicitly: keyboard, gestures, focus, backdrop, snap points, and content-height measurement.
+    </p>
+    <p style="font-size:17px;line-height:1.7;color:var(--dim);margin:0;">
+      The library upgrade was the lever. The actual work was discovery, narrowing blast radius, and replacing undocumented assumptions with behavior the next change could reason about.
+    </p>
+
+    <h2 style="font-family:var(--font-display);font-size:26px;font-weight:700;margin:40px 0 12px;letter-spacing:-.02em;">Rollout &amp; risk</h2>
+    <p style="font-size:17px;line-height:1.7;color:var(--dim);margin:0;">
+      Risk lived in <strong style="color:var(--ink);">regression hunting</strong>: high-traffic sheets, navigation transitions, keyboard-heavy forms, and the small flows users notice when they fail. The goal was not a perfect greenfield API; it was smoother animations and real dynamic-height support without trading away trust in production behavior.
+    </p>
+
+    <h2 style="font-family:var(--font-display);font-size:26px;font-weight:700;margin:40px 0 12px;letter-spacing:-.02em;">Result</h2>
+    <p style="font-size:17px;line-height:1.7;color:var(--dim);margin:0;">
+      The migration delivered smoother expansion, fewer hacks, and a clearer path for future sheet work. It also surfaced technical debt that had stayed invisible while the old implementation absorbed edge cases. The product got a better primitive; engineering got a clearer map of where coupling actually lived.
+    </p>
+
+    <h2 style="font-family:var(--font-display);font-size:26px;font-weight:700;margin:40px 0 12px;letter-spacing:-.02em;">Reflection</h2>
+    <p style="font-size:17px;line-height:1.7;color:var(--dim);margin:0;">
+      <strong style="color:var(--ink);">UI infrastructure components become product primitives.</strong> Once reused enough, they are no longer just components; they are assumptions, contracts, and user expectations. The hard part of estimation is not always the coding. It is the invisible coupling that only appears when behavior changes.
+    </p>
+
+    <p style="margin-top:48px;font-family:var(--font-mono);font-size:12px;letter-spacing:.12em;color:var(--dim);">
+      <a href="/work/monday-nested-blocks" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px;">Next: monday.com nested blocks →</a>
+    </p>
+  </article>
+  </main>
+</Layout>
