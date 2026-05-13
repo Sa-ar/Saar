@@ -1,0 +1,75 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SiteNav from './home/SiteNav.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  eyebrow: string;
+}
+
+const { title, description, eyebrow } = Astro.props;
+---
+
+<Layout title={title} description={description}>
+  <SiteNav sectionHrefPrefix="/" />
+  <main id="main-content" tabindex="-1">
+    <article class="case-article section-pad">
+      <p class="case-study-crumb">
+        <a class="case-study-crumb__back" href="/#work">← Selected work</a>
+        <span class="case-study-crumb__sep" aria-hidden="true"> · </span>
+        <span class="case-study-crumb__eyebrow">{eyebrow}</span>
+      </p>
+      <slot />
+    </article>
+  </main>
+  <button
+    type="button"
+    class="scroll-to-top"
+    id="case-study-scroll-top"
+    aria-label="Scroll to top"
+    hidden
+  >
+    <span aria-hidden="true">↑</span>
+  </button>
+  <script is:inline>
+    (function () {
+      var btn = document.getElementById('case-study-scroll-top');
+      if (!btn) return;
+      var threshold = 320;
+      function prefersReducedMotion() {
+        try {
+          return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        } catch (e) {
+          return false;
+        }
+      }
+      function sync() {
+        var y = window.scrollY || window.pageYOffset;
+        if (y > threshold) {
+          btn.classList.add('scroll-to-top--visible');
+          btn.removeAttribute('hidden');
+        } else {
+          btn.classList.remove('scroll-to-top--visible');
+          btn.setAttribute('hidden', '');
+        }
+      }
+      btn.addEventListener('click', function () {
+        window.scrollTo({
+          top: 0,
+          behavior: prefersReducedMotion() ? 'auto' : 'smooth',
+        });
+        var main = document.getElementById('main-content');
+        if (main && typeof main.focus === 'function') {
+          try {
+            main.focus({ preventScroll: true });
+          } catch (e) {
+            main.focus();
+          }
+        }
+      });
+      window.addEventListener('scroll', sync, { passive: true });
+      sync();
+    })();
+  </script>
+</Layout>

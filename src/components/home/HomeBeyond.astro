@@ -1,0 +1,28 @@
+---
+import type { BeyondBlock } from '../../data/homePage';
+
+interface Props {
+  beyondBlocks: BeyondBlock[];
+}
+
+const { beyondBlocks } = Astro.props;
+---
+
+<section id="beyond" class="section-pad beyond-section home-beyond">
+  <div class="home-kicker">04 — beyond work</div>
+  <h2 class="section-h2 section-h2--mb40">
+    life around the <span class="home-italic-muted">keyboard.</span>
+  </h2>
+  <div class="beyond-grid home-beyond-grid">
+    {beyondBlocks.map((block) => (
+      <div>
+        <h3 class="home-beyond__title">
+          {block.title}
+        </h3>
+        <p class="home-beyond__body">
+          {block.body}
+        </p>
+      </div>
+    ))}
+  </div>
+</section>

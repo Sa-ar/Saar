@@ -1,0 +1,18 @@
+---
+import StackShowcase from '../StackShowcase.tsx';
+import type { SkillGroup } from '../../data/homePage';
+
+interface Props {
+  skills: SkillGroup[];
+}
+
+const { skills } = Astro.props;
+---
+
+<section id="stack" class="section-pad home-stack">
+  <div class="home-kicker">05 — stack</div>
+  <h2 class="section-h2 section-h2--mb48">
+    tools of the <span class="home-italic-muted">trade.</span>
+  </h2>
+  <StackShowcase client:visible skills={skills} />
+</section>

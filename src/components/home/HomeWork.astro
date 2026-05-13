@@ -1,0 +1,78 @@
+---
+import type { Project } from '../../data/portfolio';
+
+interface Props {
+  projects: Project[];
+}
+
+const { projects } = Astro.props;
+---
+
+<section id="work" class="section-pad home-work">
+  <div class="home-kicker">03 — selected work · newest → oldest</div>
+  <h2 class="section-h2 section-h2--mb48">
+    product systems I've <span class="home-italic-muted">shipped.</span>
+  </h2>
+  <div>
+    {projects.map((p, i) => (
+      <article class="project-card">
+        <div class="home-project-index">
+          ({String(i + 1).padStart(2, '0')})
+        </div>
+        <div>
+          <div class="home-project-meta">
+            <span>{p.tag}</span>
+            <span class="home-project-meta__dim">·</span>
+            <span class="home-project-meta__dim">{p.role}</span>
+            <span class="home-project-meta__dim">·</span>
+            <span class="home-project-meta__dim">{p.year}</span>
+          </div>
+          <h3 class="project-title">{p.title}</h3>
+          {'sections' in p && Array.isArray(p.sections) ? (
+            <div class="home-project-sections">
+              {p.sections.map((sec) => (
+                <div>
+                  <div class="home-project-section__heading">
+                    {sec.heading}
+                  </div>
+                  <p class="home-project-section__text">{sec.text}</p>
+                  {'caseStudySlug' in sec && sec.caseStudySlug ? (
+                    <p class="home-project-link-wrap">
+                      <a
+                        class="case-study-inline-link"
+                        href={`/work/${sec.caseStudySlug}`}
+                      >
+                        Read case study →
+                      </a>
+                    </p>
+                  ) : null}
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div class="home-project-blurb-wrap">
+              <p class="home-project-section__text">{'blurb' in p ? p.blurb : ''}</p>
+              {'caseStudySlug' in p && p.caseStudySlug ? (
+                <p class="home-project-link-wrap">
+                  <a
+                    class="case-study-inline-link"
+                    href={`/work/${p.caseStudySlug}`}
+                  >
+                    Read case study →
+                  </a>
+                </p>
+              ) : null}
+            </div>
+          )}
+          <div class="home-project-stack">
+            {p.stack.map(s => (
+              <span class="home-project-stack-pill">{s}</span>
+            ))}
+          </div>
+        </div>
+        <div class="project-arrow" aria-hidden="true">↗</div>
+      </article>
+    ))}
+    <div class="home-work__divider"></div>
+  </div>
+</section>

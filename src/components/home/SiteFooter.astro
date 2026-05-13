@@ -1,0 +1,19 @@
+---
+interface Props {
+  year: number;
+}
+
+const { year } = Astro.props;
+---
+
+<footer class="section-pad site-footer">
+  <div>© {year} SAAR DAVIDSON</div>
+  <div class="footer-meta">
+    <span>v1.0</span>
+    <span>BUILD 2026.05</span>
+    <span class="footer-meta__status">
+      <span class="footer-meta__pulse" aria-hidden="true"></span>
+      ONLINE
+    </span>
+  </div>
+</footer>

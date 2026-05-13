@@ -1,5 +1,5 @@
 {
-  "name": "puffy-plasma",
+  "name": "saar-portfolio",
   "type": "module",
   "version": "0.0.1",
   "engines": {
@@ -10,7 +10,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "lint": "eslint \"src/**/*.tsx\"",
+    "lint": "eslint \"src/**/*.{ts,tsx}\"",
     "test:e2e": "playwright test",
     "test:e2e:ci": "CI=1 playwright test"
   },

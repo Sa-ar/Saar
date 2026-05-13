@@ -1,0 +1,41 @@
+---
+interface Props {
+  sinceCardLine: string;
+}
+
+const { sinceCardLine } = Astro.props;
+---
+
+<section id="about" class="about-grid section-pad home-about">
+  <div>
+    <div class="home-kicker">01 — about</div>
+    <h2 class="section-h2">
+      Product-minded.<br/>
+      <span class="home-italic-muted">AI-curious.</span><br/>
+      Frontend at heart.
+    </h2>
+  </div>
+  <div class="home-about__copy">
+    <p>
+      I’m a frontend engineer based in Ramat Gan. Day to day I work in <strong>React, TypeScript, Next.js, Remix, and Node.js</strong> — building interfaces that feel fast, systems that stay readable, and developer experience that does not fight the people using it.
+    </p>
+    <p>
+      Lately that has expanded into <strong>AI-powered product work</strong>: retrieval pipelines, agentic workflows, prompt evaluation, and UI patterns that make LLM behavior understandable instead of magical. I have a CS degree from the College of Management, a bias for useful systems over shiny demos, and <a href="#beyond" class="home-about__inline-link">life around the keyboard</a> that keeps the work human.
+    </p>
+    <div class="about-cards home-about-cards">
+      {[
+        { k: '/now',   v: 'Frontend + AI product engineering', dot: 'var(--accent)' },
+        { k: '/since', v: sinceCardLine, dot: 'var(--cyan)' },
+        { k: '/based', v: 'Ramat Gan, Israel',             dot: 'var(--lime)'   },
+      ].map(({ k, v, dot }) => (
+        <div class="home-about-card" style={`--about-dot: ${dot}`}>
+          <div class="home-about-card__label">
+            <span class="home-about-card__dot"></span>
+            {k}
+          </div>
+          <div class="home-about-card__value">{v}</div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

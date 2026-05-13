@@ -1,0 +1,49 @@
+---
+import type { CraftPillar } from '../../data/homePage';
+
+interface Props {
+  craftBrands: readonly string[];
+  craftPillars: CraftPillar[];
+}
+
+const { craftBrands, craftPillars } = Astro.props;
+---
+
+<section id="craft" class="section-pad home-craft">
+  <div class="home-kicker">02 — craft</div>
+  <h2 class="section-h2 section-h2--mb24">
+    the <span class="home-italic-muted">receipts.</span>
+  </h2>
+  <p class="home-craft__intro">
+    Three credentials most frontend engineers don't have together: <strong>production-scale React</strong> at monday.com Workdocs (300k+ users), <strong>FDA-cleared product UI</strong> at Healthy.io, and <strong>React Native architecture</strong> at Autofleet.
+  </p>
+
+  <div class="craft-brands">
+    <span class="craft-brands__label">Shipped at</span>
+    <div class="craft-brands__list">
+      {craftBrands.map((brand, i) => (
+        <>
+          {i > 0 && <span class="craft-brands__sep" aria-hidden="true">·</span>}
+          <span class="craft-brands__name">{brand}</span>
+        </>
+      ))}
+    </div>
+  </div>
+
+  <div class="case-files-grid home-case-files-grid">
+    {craftPillars.map(({ slug, n, category, project, body, dot }) => (
+      <a href={`/work/${slug}`} class="case-file-chip">
+        <div class="case-file-chip__meta">
+          <span class="case-file-chip__dot" style={`--case-dot:${dot}`}></span>
+          {n} · capability
+        </div>
+        <h3 class="case-file-chip__title">{category}</h3>
+        <div class="case-file-chip__sub">{project}</div>
+        <p class="case-file-chip__body">{body}</p>
+        <span class="case-file-chip__cta">
+          Read case study <span class="case-file-chip__arrow" aria-hidden="true">→</span>
+        </span>
+      </a>
+    ))}
+  </div>
+</section>

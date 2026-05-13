@@ -1,0 +1,53 @@
+---
+import HeroTerminal from '../HeroTerminal.tsx';
+import type { TerminalProjectRow } from '../../utils/terminalCommands';
+
+interface Props {
+  terminalProjectRows: TerminalProjectRow[];
+  bioLines: string[];
+  introLines: string[];
+  whoamiLine: string;
+  knownSlugs: string[];
+  openSectionTokens: Record<string, string>;
+  sectionIds: string[];
+}
+
+const {
+  terminalProjectRows,
+  bioLines,
+  introLines,
+  whoamiLine,
+  knownSlugs,
+  openSectionTokens,
+  sectionIds,
+} = Astro.props;
+---
+
+<section class="hero-grid hero-grid--split section-pad home-hero">
+  <div class="hero-copy">
+    <div class="hero-eyebrow home-hero__eyebrow">
+      <span class="home-hero__eyebrow-rule"></span>
+      FRONTEND ENGINEER · AI PRODUCT BUILDER
+    </div>
+    <h1 class="hero-h1">
+      Saar<br/>Davidson.
+    </h1>
+    <p class="hero-lead home-hero__lead">
+      I build <span class="home-hero__accent">polished product interfaces</span> and the AI workflows behind them — React, TypeScript, Next.js, Node.js, RAG, agents, and eval loops when the product needs them.
+    </p>
+    <div class="home-hero__actions">
+      <a href="#work" class="home-hero__btn-primary">see the work →</a>
+      <a href="#contact" class="home-hero__btn-secondary">get in touch</a>
+    </div>
+  </div>
+  <HeroTerminal
+    client:load
+    projects={terminalProjectRows}
+    bioLines={bioLines}
+    introLines={introLines}
+    whoamiLine={whoamiLine}
+    knownSlugs={knownSlugs}
+    openSectionTokens={openSectionTokens}
+    sectionIds={sectionIds}
+  />
+</section>

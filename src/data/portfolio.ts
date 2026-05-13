@@ -81,7 +81,7 @@ export const projects: Project[] = [
 ];
 
 /**
- * Section ids must match `id=""` on the homepage (index.astro).
+ * Section ids must match `id=""` on the homepage section components.
  * Aliases are extra tokens for `open <name>` (all matched lowercase).
  */
 export const siteSectionAnchors: { id: string; aliases?: string[] }[] = [

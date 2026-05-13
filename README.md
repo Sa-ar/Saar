@@ -10,7 +10,7 @@ Personal site: Astro 6, React islands, static output.
 | `pnpm dev` | Dev server at `http://localhost:4321` |
 | `pnpm build` | Production build to `dist/` |
 | `pnpm preview` | Preview the production build locally |
-| `pnpm lint` | ESLint on `src/**/*.tsx` (includes jsx-a11y) |
+| `pnpm lint` | ESLint on `src/**/*.{ts,tsx}` (jsx-a11y + react-hooks on `.tsx`) |
 | `pnpm test:e2e` | Playwright: axe (WCAG 2.2 A/AA tags), horizontal overflow, nav breakpoints, hero terminal |
 | `pnpm test:e2e:ci` | Same as `test:e2e` with CI-friendly defaults (`CI=1`) |
 
@@ -30,13 +30,15 @@ On Linux CI, system dependencies are installed via `playwright install --with-de
 
 ```text
 /
-├── e2e/              Playwright specs
+├── e2e/                 Playwright specs
 ├── public/
 ├── src/
-│   ├── components/   React (.tsx) islands
-│   ├── layouts/
+│   ├── components/      UI (home/*.astro, CaseStudyShell.astro, React islands *.tsx)
+│   ├── data/            portfolio.ts, homePage.ts
+│   ├── layouts/         Layout.astro
 │   ├── pages/
-│   └── ...
+│   ├── styles/          global.css
+│   └── utils/           experience, terminalCommands
 ├── playwright.config.ts
 └── package.json
 ```

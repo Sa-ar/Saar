@@ -1,0 +1,87 @@
+---
+import NavClock from '../NavClock.tsx';
+
+interface Props {
+  /** Use `/` on non-home routes so section links resolve to homepage anchors (e.g. `/#work`). */
+  sectionHrefPrefix?: string;
+}
+
+const { sectionHrefPrefix = '' } = Astro.props;
+const section = (id: string) => `${sectionHrefPrefix}#${id}`;
+---
+
+<nav class="site-nav section-pad">
+  <a href="/" class="nav-brand">
+    <span class="nav-dot"></span>
+    SAAR DAVIDSON
+  </a>
+  <div class="nav-links nav-links--desktop">
+    <a href={section('about')}>about</a>
+    <a href={section('craft')}>craft</a>
+    <a href={section('work')}>work</a>
+    <a href={section('beyond')}>beyond</a>
+    <a href={section('stack')}>stack</a>
+    <a href={section('contact')}>contact</a>
+  </div>
+  <div class="nav-right">
+    <span class="nav-clock-wrap">
+      <NavClock client:load />
+    </span>
+    <button
+      class="nav-hamburger"
+      id="nav-hamburger"
+      type="button"
+      aria-label="Toggle navigation menu"
+      aria-expanded="false"
+      aria-controls="nav-mobile-menu"
+    >
+      <span class="nav-hamburger__bar"></span>
+      <span class="nav-hamburger__bar"></span>
+      <span class="nav-hamburger__bar"></span>
+    </button>
+  </div>
+  <div class="nav-links nav-links--mobile" id="nav-mobile-menu" data-open="false">
+    <a href={section('about')}>about</a>
+    <a href={section('craft')}>craft</a>
+    <a href={section('work')}>work</a>
+    <a href={section('beyond')}>beyond</a>
+    <a href={section('stack')}>stack</a>
+    <a href={section('contact')}>contact</a>
+  </div>
+</nav>
+
+<script is:inline>
+  (function () {
+    const btn = document.getElementById('nav-hamburger');
+    const menu = document.getElementById('nav-mobile-menu');
+    if (!btn || !menu) return;
+    const setOpen = function (open) {
+      var wasOpen = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(open));
+      menu.setAttribute('data-open', String(open));
+      if (open && !wasOpen) {
+        requestAnimationFrame(function () {
+          var link = menu.querySelector('a');
+          if (link) link.focus();
+        });
+      } else if (!open && wasOpen) {
+        btn.focus();
+      }
+    };
+    btn.addEventListener('click', function () {
+      setOpen(btn.getAttribute('aria-expanded') !== 'true');
+    });
+    menu.addEventListener('click', function (event) {
+      if (event.target instanceof Element && event.target.closest('a')) {
+        setOpen(false);
+      }
+    });
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape') setOpen(false);
+    });
+    var mq = window.matchMedia('(min-width: 821px)');
+    var handleChange = function (e) { if (e.matches) setOpen(false); };
+    if (mq.addEventListener) mq.addEventListener('change', handleChange);
+    else mq.addListener(handleChange);
+  })();
+</script>
