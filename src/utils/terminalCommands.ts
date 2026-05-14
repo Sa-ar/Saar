@@ -248,8 +248,8 @@ export function runCommand(raw: string, ctx: RunCommandContext): CommandResult {
     const t = argLower.replace(/^#/, '');
     if (t === '') {
       return {
-        lines: ['Opening #work …'],
-        navigate: { kind: 'hash', value: 'work' },
+        lines: ['Opening #experience …'],
+        navigate: { kind: 'hash', value: 'experience' },
       };
     }
 

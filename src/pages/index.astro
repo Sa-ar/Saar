@@ -2,8 +2,8 @@
 import Layout from '../layouts/Layout.astro';
 import SiteNav from '../components/home/SiteNav.astro';
 import HomeHero from '../components/home/HomeHero.astro';
+import HomeProofStrip from '../components/home/HomeProofStrip.astro';
 import HomeAbout from '../components/home/HomeAbout.astro';
-import HomeCraft from '../components/home/HomeCraft.astro';
 import HomeWork from '../components/home/HomeWork.astro';
 import HomeBeyond from '../components/home/HomeBeyond.astro';
 import HomeStack from '../components/home/HomeStack.astro';
@@ -19,8 +19,6 @@ import {
 } from '../data/portfolio';
 import {
   skills,
-  craftBrands,
-  craftPillars,
   beyondBlocks,
   heroIntroTerminalLines,
   heroWhoamiLine,
@@ -54,12 +52,12 @@ const year = new Date().getFullYear();
       openSectionTokens={openSectionTokens}
       sectionIds={sectionIds}
     />
+    <HomeProofStrip />
     <HomeAbout sinceCardLine={sinceCardLine} />
-    <HomeCraft craftBrands={craftBrands} craftPillars={craftPillars} />
     <HomeWork projects={projects} />
-    <HomeBeyond beyondBlocks={beyondBlocks} />
     <HomeStack skills={skills} />
     <HomeContact />
+    <HomeBeyond beyondBlocks={beyondBlocks} />
   </main>
   <SiteFooter year={year} />
 </Layout>

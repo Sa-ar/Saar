@@ -2,6 +2,8 @@
 export type ProjectSection = {
   heading: string;
   text: string;
+  /** Supplementary line (e.g. other work), visually de-emphasized */
+  aside?: string;
   caseStudySlug?: string;
 };
 
@@ -30,21 +32,23 @@ export const projects: Project[] = [
   {
     tag: 'Enpitech',
     year: '2023 — now',
-    role: 'Senior Frontend · AI product',
-    title: 'Enpitech — product engineering across mobile, web, and AI',
+    role: 'Senior Frontend Engineer',
+    title: 'Enpitech — client product teams, web and mobile',
     sections: [
       {
         heading: 'Autofleet',
-        text: 'Built a new React Native app with TypeScript and MobX on top of an existing product that still carried legacy constraints. It was the faster path to ship fleet operations, automated IRS reporting, driver maintenance, and Cypress regression coverage — but the new work had to live with the old seams. The deepest story was a @gorhom/bottom-sheet upgrade that looked small on paper and behaved like a platform migration — case study below.',
+        text: 'At Enpitech, I worked inside client product teams across web and mobile. At Autofleet, I worked on a React Native product with legacy constraints. One notable project was a Bottom Sheet upgrade that exposed hidden coupling across navigation, keyboard behavior, gestures, and layout.',
+        aside:
+          'Other work included reporting flows, maintenance history, regression coverage, and web performance improvements.',
         caseStudySlug: 'bottom-sheet',
       },
       {
         heading: 'Affilomania',
-        text: 'Cut bundle size by roughly half with Vite tuning, tighter dependency boundaries, and tree-shaking that made the product feel lighter without changing what users came for.',
+        text: 'Roughly halved bundle size with Vite tuning, tighter dependency boundaries, and tree-shaking.',
       },
       {
         heading: 'Enpitech.dev',
-        text: 'Built and shipped the company marketing site in Remix and Tailwind, balancing Core Web Vitals, typography, motion, and a handoff that another team could actually live with.',
+        text: 'Company marketing site in Remix and Tailwind: Core Web Vitals, typography, motion, and a maintainable handoff.',
       },
     ],
     stack: ['React Native', 'TypeScript', 'Node.js', 'MobX', 'Remix', 'Tailwind', 'Cypress', 'Vite'],
@@ -55,7 +59,7 @@ export const projects: Project[] = [
     role: 'Full-stack',
     title: 'monday.com — doc building blocks',
     blurb:
-      'Worked on monday Workdocs, shipping Block-in-Block and Callout blocks used by 300k+ active users. The work was less about drawing nested UI and more about protecting a document model from invalid states.',
+      'At monday.com, I worked on Workdocs, a production-scale React editor. One of the main projects was NestedBlock: extending the editor architecture so some blocks could contain other blocks, without allowing invalid document states.',
     caseStudySlug: 'monday-nested-blocks',
     stack: ['React', 'Node.js', 'SASS', 'GraphQL', 'Redux'],
   },
@@ -63,9 +67,9 @@ export const projects: Project[] = [
     tag: 'Digital health',
     year: '2021 — 22',
     role: 'Frontend',
-    title: 'Healthy.io — marketing & regulated product UI',
+    title: 'Healthy.io — marketing & product UI',
     blurb:
-      'Maintained and improved global Next.js and DatoCMS properties where SEO, accessibility, localization, and content velocity all mattered. Also contributed to internal and patient-facing product surfaces for FDA-cleared home urinalysis, where UI states had to be clear and careful.',
+      'At Healthy.io, I worked on frontend surfaces in a regulated health-tech environment. The work included marketing systems, product UI, SEO-sensitive pages, accessibility, and localization concerns.',
     caseStudySlug: 'healthy-io-marketing',
     stack: ['Next.js', 'Node.js', 'DatoCMS', 'React', 'Styled Components', 'GraphQL'],
   },
@@ -75,7 +79,7 @@ export const projects: Project[] = [
     role: 'Full-stack',
     title: 'DonateIt — donation MVP',
     blurb:
-      'Early-career full-stack MVP for a social donation platform: real-time contribution tracking, donor-facing flows, and the first lessons in turning messy product needs into something people can use.',
+      'Full-stack MVP for a social donation platform: contributions, donor flows, and early lessons in turning vague product asks into something shippable.',
     stack: ['React', 'Node.js', 'REST'],
   },
 ];
@@ -85,12 +89,18 @@ export const projects: Project[] = [
  * Aliases are extra tokens for `open <name>` (all matched lowercase).
  */
 export const siteSectionAnchors: { id: string; aliases?: string[] }[] = [
+  {
+    id: 'proof',
+    aliases: ['mix', 'uncommon', 'receipts', 'craft', 'cases', 'stats'],
+  },
   { id: 'about', aliases: ['me', 'bio'] },
-  { id: 'craft', aliases: ['proof', 'receipts', 'cases', 'stats'] },
-  { id: 'work', aliases: ['projects', 'shipping', 'portfolio'] },
-  { id: 'beyond', aliases: ['life', 'outside'] },
+  {
+    id: 'experience',
+    aliases: ['work', 'projects', 'shipping', 'portfolio'],
+  },
   { id: 'stack', aliases: ['skills', 'tools', 'tech'] },
   { id: 'contact', aliases: ['touch', 'hello', 'hire', 'linkedin', 'email'] },
+  { id: 'beyond', aliases: ['life', 'outside'] },
 ];
 
 /** Flat map: token (lowercase) → canonical section id for `open`. */
@@ -107,10 +117,9 @@ export function sectionOpenTokenToId(): Record<string, string> {
 
 /** Short lines for `cat bio` / `cat README.md` in the hero terminal. */
 export const heroTerminalBioLines: string[] = [
-  'Frontend engineer based in Ramat Gan, Israel.',
-  'Ships React / TypeScript / Next.js interfaces and the AI workflows behind them.',
-  'Care about retrieval people can trust, agents with boundaries, and evals tied to real tasks.',
-  'For the longer hero pitch: cat intro',
+  'Senior frontend engineer based in Ramat Gan, Israel.',
+  'Mostly React, TypeScript, React Native, and product UI architecture; some AI-powered product flows lately.',
+  'For a bit more: cat intro',
 ];
 
 export function collectCaseStudySlugs(project: Project): string[] {

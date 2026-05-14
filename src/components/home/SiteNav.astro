@@ -2,7 +2,7 @@
 import NavClock from '../NavClock.tsx';
 
 interface Props {
-  /** Use `/` on non-home routes so section links resolve to homepage anchors (e.g. `/#work`). */
+  /** Use `/` on non-home routes so section links resolve to homepage anchors (e.g. `/#experience`). */
   sectionHrefPrefix?: string;
 }
 
@@ -16,12 +16,12 @@ const section = (id: string) => `${sectionHrefPrefix}#${id}`;
     SAAR DAVIDSON
   </a>
   <div class="nav-links nav-links--desktop">
+    <a href={section('proof')}>proof</a>
     <a href={section('about')}>about</a>
-    <a href={section('craft')}>craft</a>
-    <a href={section('work')}>work</a>
-    <a href={section('beyond')}>beyond</a>
+    <a href={section('experience')}>experience</a>
     <a href={section('stack')}>stack</a>
     <a href={section('contact')}>contact</a>
+    <a href={section('beyond')}>beyond</a>
   </div>
   <div class="nav-right">
     <span class="nav-clock-wrap">
@@ -41,12 +41,12 @@ const section = (id: string) => `${sectionHrefPrefix}#${id}`;
     </button>
   </div>
   <div class="nav-links nav-links--mobile" id="nav-mobile-menu" data-open="false">
+    <a href={section('proof')}>proof</a>
     <a href={section('about')}>about</a>
-    <a href={section('craft')}>craft</a>
-    <a href={section('work')}>work</a>
-    <a href={section('beyond')}>beyond</a>
+    <a href={section('experience')}>experience</a>
     <a href={section('stack')}>stack</a>
     <a href={section('contact')}>contact</a>
+    <a href={section('beyond')}>beyond</a>
   </div>
 </nav>
 

@@ -3,61 +3,42 @@ import { shippingYearsProse } from '../utils/experience';
 export type SkillGroup = { group: string; items: string[] };
 
 export const skills: SkillGroup[] = [
-  { group: 'Foundations', items: ['TypeScript', 'JavaScript', 'Node.js', 'Python', 'CSS', 'Tailwind'] },
-  { group: 'Frameworks', items: ['React', 'Next.js', 'Remix', 'React Native', 'Solid', 'Styled Components'] },
-  { group: 'Build & APIs', items: ['Vite', 'Cypress', 'Turborepo', 'Storybook', 'GraphQL', 'REST', 'TanStack Start', 'DatoCMS'] },
-  { group: 'AI product', items: ['LLM apps', 'RAG', 'Agents', 'pgvector', 'Prompt eval', 'TanStack Query', 'MobX'] },
-];
-
-export const craftBrands = ['monday.com', 'Healthy.io', 'Autofleet', 'Enpitech'] as const;
-
-export type CraftPillar = {
-  slug: string;
-  n: string;
-  category: string;
-  project: string;
-  body: string;
-  dot: string;
-};
-
-export const craftPillars: CraftPillar[] = [
   {
-    slug: 'monday-nested-blocks',
-    n: '01',
-    category: 'Scale',
-    project: 'monday Workdocs · Block-in-Block & Callout',
-    body: 'Shipped to 300k+ active users. The real work was protecting a document model from invalid states — not drawing nested UI.',
-    dot: 'var(--accent)',
+    group: 'Frontend',
+    items: [
+      'React',
+      'TypeScript',
+      'Next.js',
+      'Remix',
+      'React Native',
+      'Tailwind',
+      'Styled Components',
+    ],
   },
   {
-    slug: 'healthy-io-marketing',
-    n: '02',
-    category: 'Regulated',
-    project: 'Healthy.io · FDA-cleared home urinalysis',
-    body: 'Global Next.js + DatoCMS surfaces where SEO, accessibility, localization, and clinical clarity all had to hold together.',
-    dot: 'var(--cyan)',
+    group: 'Product systems',
+    items: ['Design systems', 'Accessibility', 'Performance', 'DX', 'Storybook', 'Cypress'],
   },
   {
-    slug: 'bottom-sheet',
-    n: '03',
-    category: 'Architecture',
-    project: 'Autofleet · React Native + MobX',
-    body: 'A @gorhom/bottom-sheet upgrade that looked like a version bump and behaved like a platform migration — weeks of reconciling new internals against legacy seams.',
-    dot: 'var(--lime)',
+    group: 'AI product',
+    items: ['LLM apps', 'RAG', 'Agents', 'pgvector', 'Prompt evaluation'],
+  },
+  {
+    group: 'Backend & data',
+    items: ['Node.js', 'GraphQL', 'REST', 'PostgreSQL', 'Python'],
   },
 ];
 
-/** Long hero copy — read in the terminal via `cat intro`. */
+/** Longer pitch — hero terminal `cat intro`. */
 export function heroIntroTerminalLines(): string[] {
   const yearsShipping = shippingYearsProse();
   return [
-    'I build polished product interfaces and the AI workflows behind them — React, TypeScript, Next.js, Node.js, RAG, agents, and eval loops when the product needs them.',
-    `${yearsShipping} shipping front-end systems across health, collaboration, logistics, and consulting. These days I’m especially interested in AI features that feel like product work, not demos: retrieval that earns trust, agents with visible boundaries, and interfaces that help people understand what the model is doing. The full thread lives in #work.`,
+    'I build frontend systems for complex products. Most of my work is React, TypeScript, React Native, and product UI architecture; recently more AI-powered product flows too.',
+    `${yearsShipping} across health, collaboration, and logistics. More in #experience.`,
   ];
 }
 
-export const heroWhoamiLine =
-  'saar — frontend engineer · AI product builder · Ramat Gan, IL';
+export const heroWhoamiLine = 'saar — senior frontend engineer · Ramat Gan, IL';
 
 export type BeyondBlock = { title: string; body: string };
 

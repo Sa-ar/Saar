@@ -1,9 +1,9 @@
 ---
-title: Healthy.io — marketing systems | Saar Davidson
-description: "Next.js marketing systems at Healthy.io: SEO, accessibility, geofencing via middleware, and keeping content velocity on a maintainable foundation."
-eyebrow: HEALTHY.IO · MARKETING PLATFORM
-h1: Marketing systems are product systems when the stakes are high.
-lead: "At Healthy.io I worked on **multiple marketing platforms and landing systems**. The work may look like “just pages” from the outside, but the real job was keeping public surfaces crawlable, accessible, localized, fast, and flexible enough for marketing to move."
+title: Healthy.io — marketing & product frontend | Saar Davidson
+description: "Next.js marketing properties at Healthy.io: SEO, accessibility, middleware, and maintainability."
+eyebrow: HEALTHY.IO
+h1: Healthy.io — marketing and product frontend
+lead: "I worked on **marketing platforms and landing systems**, and on **frontend across public and patient-facing surfaces in a regulated health-tech company**."
 navPrev:
   href: /work/monday-nested-blocks
   label: ← monday.com nested blocks
@@ -11,34 +11,24 @@ navPrev:
 
 ## Context
 
-The properties had to stay fast, maintainable for a small frontend surface, and flexible enough for campaigns and experiments. Marketing, design, compliance-adjacent review, and engineering all pulled on the same Next.js and CMS layer.
+The work often looked like marketing infrastructure, but the risks were product risks: SEO regressions, accessibility issues, localization bugs, analytics gaps, and broken user journeys.
+
+Sites had to stay fast enough, easy enough to change for campaigns, and predictable for a small frontend team.
 
 ## Problem
 
-The tension was not “build a landing page”; it was **balancing business velocity with architectural sanity**. Every shortcut shows up twice: once in Lighthouse, once six months later when nobody remembers why that route behaves differently in production.
+Marketing velocity and refactors both touched the same routes. Shortcuts showed up later as SEO or accessibility regressions.
 
-Hidden complexity stacked up: SEO risk during refactors, accessibility expectations, performance pressure, content velocity, and experimentation loops that do not wait for a rewrite window.
+## Technical notes
 
-## Constraints
+Shared **Next.js** patterns: reusable page shells, clear CMS boundaries, and **middleware** for cross-cutting behavior (country routing, geofencing, redirects) instead of duplicating checks in every page.
 
-- SEO and share metadata had to stay correct across locales and templates.
-- Accessibility was not a polish pass; it was part of what “shipped” meant.
-- Shared infrastructure across sites had to stay predictable as page count grew.
+We upgraded a large codebase from **Next.js 11 → 12** and used that window to lean on **middleware** for country-specific behavior. That kept geo logic in one place, which was easier to review for SEO and accessibility assumptions and cheaper to maintain when routes changed.
 
-## Technical decision
+## Risk
 
-Standardize on **Next.js** patterns the team could reuse: shared page systems, clear data boundaries for CMS content, and **middleware** where cross-cutting behavior belonged, including country-specific routing, geofencing, sunsets, redirects, and traffic shaping without duplicating logic in every page.
-
-A notable slice of this era was upgrading a large codebase from **Next.js 11 → 12**. The version bump was not the story; the unlock was using middleware deliberately for geo and routing concerns instead of scattering one-off checks through the tree.
-
-## Rollout & risk
-
-Risk showed up as **SEO regressions**, subtle accessibility breaks, and performance cliffs when marketing velocity outpaced cleanup. Mitigation was intentionally boring: representative routes in CI, design alignment before pixel-chasing, and explicit boundaries around what “pixel perfect” meant so engineering time went to durable outcomes.
+Representative routes in CI, boring checklists on SEO metadata and a11y, and keeping “pixel perfect” scoped so time went to durable behavior.
 
 ## Result
 
-Marketing could iterate faster on a shared, well-understood stack. Engineering kept a maintainable spine — routing, middleware, and reusable page shells — instead of a graveyard of one-off landings. The public sites stayed within reach of performance and accessibility goals while the business kept shipping campaigns.
-
-## Reflection
-
-**Good frontend work protects both users and the team that ships for them.** The durable win is aligning on what actually moves the business — crawlability, clarity, speed, accessibility — and letting the craft show up there first.
+Marketing could ship campaigns without the stack turning into a pile of one-off landings.

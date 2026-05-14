@@ -1,9 +1,9 @@
 ---
-title: Bottom sheet migration — product primitive case study | Saar Davidson
-description: "A React Native bottom-sheet migration that became product infrastructure work: hidden contracts, gesture stacks, keyboard behavior, and safer rollout."
+title: Bottom sheet migration | Saar Davidson
+description: "React Native @gorhom/bottom-sheet upgrade: navigation, keyboard, gestures, layout, and rollout."
 eyebrow: ENPITECH · REACT NATIVE
-h1: A small upgrade that behaved like product infrastructure.
-lead: "The brief was to move Autofleet’s mobile surface to a newer **@gorhom/bottom-sheet**, remove old hacks, improve animations, and support dynamic content height. On paper, that sounds like a dependency bump. In practice, it touched a product primitive that many flows quietly depended on."
+h1: Bottom sheet library migration
+lead: "Autofleet needed a newer **@gorhom/bottom-sheet**, fewer hacks, and better support for dynamic content height. The compile step stayed green; behavior did not."
 navNext:
   href: /work/monday-nested-blocks
   label: "Next: monday.com nested blocks →"
@@ -11,34 +11,34 @@ navNext:
 
 ## Context
 
-Autofleet ships operator and driver flows in React Native. Bottom sheets were not one neat component; they were a **shared interaction layer** made of modal wrappers, legacy drawers, gesture handlers, keyboard avoidance, and navigation glue. Upgrading the library meant changing timing and mount order for flows that had been tuned in place for years.
+Autofleet uses React Native for operator and driver flows. Sheets were shared infrastructure: modal wrappers, gesture handlers, keyboard avoidance, and navigation glue. Changing the library changed timing and mount order in a lot of places.
+
+I owned the migration from investigation through implementation, testing, and rollout validation.
 
 ## Problem
 
-The risk was not mostly TypeScript errors; it was **silent behavioral drift**. Two abstractions (`BottomDrawer` and `BottomSheet`) coexisted with different contracts. Screens depended on animation timing, snap defaults, backdrop taps, focus order, and gesture propagation, often without saying so.
+Two patterns (`BottomDrawer` and `BottomSheet`) had drifted apart. Screens relied on animation timing, snaps, backdrop taps, focus order, and gestures without documenting it. A library bump surfaced that in navigation stacks, keyboard behavior, pan handlers, and layout measurement for dynamic height.
 
-Changing the sheet changed navigation stacks, modal layering, keyboard behavior, and layout measurement, even when the compile step stayed green.
+**Before:** The app had duplicated sheet wrappers, timing assumptions, and layout hacks.
+
+**After:** The app had smoother expansion, dynamic-height support, fewer hacks, and a clearer path toward one shared bottom-sheet abstraction.
+
+The library upgrade was the trigger. The real work was finding the hidden assumptions around navigation, keyboard behavior, gestures, and layout.
 
 ## Constraints
 
-- High coupling: z-index workarounds, duplicated implementations, and modal wrappers that assumed the old timing model.
-- Regressions that only showed up in real flows, including late-night driver paths rather than happy-path smoke tests.
-- No single owner for “all sheets”; usage had evolved organically across teams and features.
+- Duplicated implementations and z-index workarounds tied to the old timing model.
+- Regressions that showed up in real flows, not only smoke tests.
+- No single owner for every sheet; usage had grown feature by feature.
 
-## Technical decision
+## What we did
 
-Treat the migration as **re-establishing contracts**, not swapping imports. I inventoried call sites, aligned usage around one abstraction where possible, and validated the risky dimensions explicitly: keyboard, gestures, focus, backdrop, snap points, and content-height measurement.
+Inventory call sites, align on one abstraction where possible, and re-check keyboard, gestures, focus, backdrop, snaps, and content height explicitly.
 
-The library upgrade was the lever. The actual work was discovery, narrowing blast radius, and replacing undocumented assumptions with behavior the next change could reason about.
+## Rollout
 
-## Rollout & risk
+Focused regression passes on high-traffic sheets, navigation transitions, and keyboard-heavy forms.
 
-Risk lived in **regression hunting**: high-traffic sheets, navigation transitions, keyboard-heavy forms, and the small flows users notice when they fail. The goal was not a perfect greenfield API; it was smoother animations and real dynamic-height support without trading away trust in production behavior.
+## Outcome
 
-## Result
-
-The migration delivered smoother expansion, fewer hacks, and a clearer path for future sheet work. It also surfaced technical debt that had stayed invisible while the old implementation absorbed edge cases. The product got a better primitive; engineering got a clearer map of where coupling actually lived.
-
-## Reflection
-
-**UI infrastructure components become product primitives.** Once reused enough, they are no longer just components; they are assumptions, contracts, and user expectations. The hard part of estimation is not always the coding. It is the invisible coupling that only appears when behavior changes.
+Smoother sheets, less hacky code, and a clearer map of where coupling actually lived for the next change.

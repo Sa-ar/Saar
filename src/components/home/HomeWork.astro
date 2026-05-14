@@ -8,11 +8,13 @@ interface Props {
 const { projects } = Astro.props;
 ---
 
-<section id="work" class="section-pad home-work">
-  <div class="home-kicker">03 — selected work · newest → oldest</div>
-  <h2 class="section-h2 section-h2--mb48">
-    product systems I've <span class="home-italic-muted">shipped.</span>
-  </h2>
+<section
+  id="experience"
+  class="section-pad home-work"
+  aria-labelledby="experience-heading"
+>
+  <div class="home-kicker">03 — experience · newest → oldest</div>
+  <h2 id="experience-heading" class="section-h2 section-h2--mb48">Experience</h2>
   <div>
     {projects.map((p, i) => (
       <article class="project-card">
@@ -36,6 +38,9 @@ const { projects } = Astro.props;
                     {sec.heading}
                   </div>
                   <p class="home-project-section__text">{sec.text}</p>
+                  {'aside' in sec && sec.aside ? (
+                    <p class="home-project-section__aside">{sec.aside}</p>
+                  ) : null}
                   {'caseStudySlug' in sec && sec.caseStudySlug ? (
                     <p class="home-project-link-wrap">
                       <a
