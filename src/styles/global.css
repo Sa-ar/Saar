@@ -10,12 +10,21 @@
     --lime:   #C6F432;
     --violet: #A855F7;
     --dim:    rgba(248, 241, 255, 0.6);
+    /* Cap readable width on ultra-wide viewports (nav + main + footer share this lane) */
+    --page-max: 1280px;
   }
 
   *, *::before, *::after { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
   html, body { margin: 0; padding: 0; background: var(--bg); }
   body { font-family: var(--font-body); color: var(--ink); overflow-x: hidden; }
+
+  /* Above ~page-max + gutters, center the layout so ultra-wide screens do not stretch */
+  @media (min-width: 1320px) {
+    body {
+      padding-inline: calc((100vw - var(--page-max)) / 2);
+    }
+  }
 
   .skip-to-main {
     position: absolute;
