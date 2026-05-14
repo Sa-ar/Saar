@@ -12,6 +12,8 @@
     --dim:    rgba(248, 241, 255, 0.6);
     /* Cap readable width on ultra-wide viewports (nav + main + footer share this lane) */
     --page-max: 1280px;
+    /* Horizontal gutter inside the content lane (matches section padding; narrows on small screens). */
+    --section-inline-pad: 56px;
     /* Sticky nav clearance for in-page anchors (see nav.site-nav padding) */
     --nav-scroll-offset: 96px;
   }
@@ -135,7 +137,7 @@
     }
   }
 
-  /* Sticky top nav */
+  /* Sticky top nav — full-viewport bar so the frosted background isn’t clipped by body centering on wide screens */
   nav.site-nav {
     position: sticky;
     top: 0;
@@ -146,7 +148,10 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 28px 56px;
+    width: 100vw;
+    max-width: 100vw;
+    margin-left: calc(50% - 50vw);
+    padding: 28px calc(max(0px, (100vw - var(--page-max)) / 2) + var(--section-inline-pad));
     border-bottom: 1px solid rgba(248, 241, 255, 0.08);
   }
 
@@ -1513,9 +1518,14 @@
   }
 
   .home-beyond {
-    padding: 120px 56px;
     position: relative;
     z-index: 1;
+    width: 100vw;
+    max-width: 100vw;
+    margin-left: calc(50% - 50vw);
+    padding-top: 120px;
+    padding-bottom: 120px;
+    padding-inline: calc(max(0px, (100vw - var(--page-max)) / 2) + var(--section-inline-pad));
     background: var(--panel);
     border-top: 1px solid rgba(248, 241, 255, 0.08);
     border-bottom: 1px solid rgba(248, 241, 255, 0.08);
@@ -1618,10 +1628,17 @@
     .contact-h2  { font-size: 52px !important; }
   }
   @media (max-width: 900px) {
+    :root {
+      --section-inline-pad: 24px;
+    }
     .skills-grid { grid-template-columns: repeat(2,1fr) !important; }
     .stack-showcase-grid { grid-template-columns: repeat(2, 1fr) !important; }
     .section-pad { padding-left: 24px !important; padding-right: 24px !important; }
-    nav          { padding: 20px 24px !important; }
+    nav {
+      padding-top: 20px !important;
+      padding-bottom: 20px !important;
+      padding-inline: calc(max(0px, (100vw - var(--page-max)) / 2) + var(--section-inline-pad)) !important;
+    }
   }
   @media (max-width: 700px) {
     .section-h2   { font-size: 40px !important; }
